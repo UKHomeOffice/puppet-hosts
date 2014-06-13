@@ -124,7 +124,7 @@ class hosts (
 
   $manage_file_content = $hosts::content ? {
     ''        => $hosts::template ? {
-      ''        => $hosts::dynamic_template ? {
+      ''        => template($hosts::dynamic_template) ? {
         ''      => undef,
         default => template($hosts::dynamic_template),
       },
