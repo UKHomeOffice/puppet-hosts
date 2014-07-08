@@ -126,7 +126,7 @@ class hosts (
     ''        => $hosts::template ? {
       ''        => template($hosts::dynamic_template) ? {
         ''      => undef,
-        default => template($hosts::dynamic_template),
+        default => $hosts::dynamic_template,
       },
       default   => template($hosts::template),
     },
