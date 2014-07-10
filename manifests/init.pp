@@ -124,9 +124,9 @@ class hosts (
 
   $manage_file_content = $hosts::content ? {
     ''        => $hosts::template ? {
-      ''        => template($hosts::dynamic_template) ? {
+      ''        => $hosts::dynamic_template ? {
         ''      => undef,
-        default => $hosts::dynamic_template,
+        default => template($hosts::dynamic_template),
       },
       default   => template($hosts::template),
     },
@@ -145,11 +145,6 @@ class hosts (
     replace => $hosts::manage_file_replace,
     audit   => $hosts::manage_audit,
     noop    => $hosts::noops,
-  }
-
-  ### Include custom class if $my_class is set
-  if $hosts::my_class {
-    include $hosts::my_class
   }
 
   ### Manage hosts dynamically
